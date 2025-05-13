@@ -36,10 +36,21 @@
 \RequirePackage[noindent,nocap,UTF8]{ctexcap}
 %----字体名
 \RequirePackage{ifpdf,ifxetex}
-\ifpdf
-	\newcommand{\fzbHei}{\heiti}
+\ifxetex
+  \IfFontExistsTF{SimHei}
+  {
+    \newCJKfontfamily[heitiFakeBold]{\heitiFakeBold}{SimHei}[AutoFakeBold=2.5]
+  }{
+    \newcommand{\heitiFakeBold}{\heiti}
+  }
+
+  \IfFontExistsTF{Times New Roman}
+  {
+    \setmainfont{Times New Roman}
+  }
+
 \else
-	\newCJKfontfamily[fzbighei]{\fzbHei}{方正大黑简体}[Path=./fonts/]
+  \newcommand{\heitiFakeBold}{\heiti}
 \fi
 %------中文支持------
 
