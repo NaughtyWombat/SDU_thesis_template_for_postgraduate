@@ -2,6 +2,22 @@
 %!TEX program = xelatex
 %\expandafter\def\csname CTEX@spaceChar\endcsname{\hspace{1em}}
 \documentclass[winfonts, print]{sduthesis}
+
+% 盲审开关定义
+\newif\ifblindreview
+%\blindreviewtrue % 变量开关由 titlepageinfo.tex 文件定义
+\newcommand{\blindreview}[1]{%
+  \ifblindreview
+    *%
+  \else
+    #1%
+  \fi
+}
+
+% 彩色封面开关定义
+\newif\ifcolorcover
+%\colorcovertrue % 变量开关由 titlepageinfo.tex 文件定义
+
 \input{contents/titlepageinfo.tex}
 \input{contents/usersettings.tex}
 \begin{document}
