@@ -1,0 +1,31 @@
+%!TEX program = xelatex
+\documentclass{article}
+\usepackage[UTF8, fontset=none]{ctex}
+\usepackage{fontspec}
+
+\setmainfont[
+  Path = fonts/,
+  BoldFont = TimesNewRomanBold.ttf,
+  ItalicFont = TimesNewRomanItalic.ttf,
+  BoldItalicFont = TimesNewRomanBoldItalic.ttf
+]{TimesNewRoman.ttf}
+
+\setCJKmainfont[Path = fonts/]{simsun.ttc}
+\setCJKsansfont[Path = fonts/]{simhei.ttf}
+\setCJKmonofont[Path = fonts/]{simkai.ttf}
+\setCJKfamilyfont{fs}[Path = fonts/]{FangSong_GB2312.ttf}
+
+\begin{document}
+
+Times New Roman regular, \textbf{bold}, \textit{italic},
+\textbf{\textit{bold italic}}.
+
+宋体：山东大学硕士学位论文参考文献测试。
+
+{\sffamily 黑体：山东大学硕士学位论文参考文献测试。}
+
+{\ttfamily 楷体：山东大学硕士学位论文参考文献测试。}
+
+{\CJKfamily{fs} 仿宋：山东大学硕士学位论文参考文献测试。}
+
+\end{document}

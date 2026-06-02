@@ -1,6 +1,6 @@
 # 山东大学硕士/博士研究生毕业论文模板
 
-本论文模板在 XeLaTeX (Tex Live 2025) 环境下编译通过。
+本论文模板在 XeLaTeX (TeX Live 2026) 环境下编译通过，并支持使用 BibTeX 按 GB/T 7714 数字顺序制生成参考文献。
 
 ## 模板参照
 
@@ -37,13 +37,35 @@
 
 ## 编译环境
 
-请使用 CTeX 套装进行编译，需要 `xelatex` 和 `pdflatex` 命令支持。
+请使用 XeLaTeX 编译，需要 `xelatex` 和 `bibtex` 命令支持。参考文献使用
+[`gbt7714-bibtex-style`](https://github.com/zepinglee/gbt7714-bibtex-style)，项目中已经包含
+`gbt7714.sty` 和 `gbt7714-numeric.bst`，无需额外安装。
 
 如果你的 CTeX 套装中 ctex 包为 1.02c 或更早的版本，请将`SDUthesistemplate.tex`当中下面这句话取消注释：
 
 ```latex
 % \expandafter\def\csname CTEX@spaceChar\endcsname{\hspace{1em}}
 ```
+
+### Overleaf 与字体
+
+Overleaf 运行在 Linux/TeX Live 环境中，通常没有 Windows 系统字体。因此主文件默认使用：
+
+```latex
+\documentclass[print]{sduthesis}
+```
+
+不要使用 `winfonts` 选项，除非你在本地 Windows 环境中编译并确认系统已安装宋体、黑体等字体。
+
+项目会自动从 `fonts/` 目录加载字体文件：
+
+- `simsun.ttc`：宋体
+- `simhei.ttf`：黑体
+- `simkai.ttf`：楷体
+- `FangSong_GB2312.ttf`：仿宋
+- `TimesNewRoman*.ttf`：Times New Roman
+
+在 Overleaf 使用时，请上传完整的 `fonts/` 目录，并在 Menu 中将 compiler 设置为 **XeLaTeX**。如果替换字体文件，请确认文件名与 `contents/usersettings.tex`、`sduthesis.cls` 中的配置一致。请自行确认所上传字体的授权许可。
 
 ## 代码结构
 
@@ -53,15 +75,37 @@
 - `sduthesis.cls`： 论文样式文件。
 - `fonts/`： 字体文件路径(用于自动加载字体)。
 - `figures/`： 图片存放路径，你也可以创建`figure`/`pictures`/`picture`/`pic`/`image`等路径。
-- `contents/`： 论文所在路径。其中`usersettings.tex` 为整个项目的设置。
+- `contents/`： 论文所在路径。其中`usersettings.tex` 为整个项目的设置，`references.bib` 为 BibTeX 参考文献数据库。
+- `gbt7714.sty`、`gbt7714-numeric.bst`：GB/T 7714 参考文献样式文件。
 
 ## 怎样编译
 
-文档使用 XeLaTeX 进行编译。这要求所有参与编译的文档必须使用 UTF8 编码格式，因此建议你新建的任何参与编译的 `.tex` 文件都必须使用 UTF-8 编码，使用 `% !Mode:: "TeX:UTF-8"` 声明文档编码格式。
+文档使用 XeLaTeX + BibTeX 进行编译。这要求所有参与编译的文档必须使用 UTF-8 编码格式，因此建议你新建的任何参与编译的 `.tex` 文件都必须使用 UTF-8 编码，使用 `% !Mode:: "TeX:UTF-8"` 声明文档编码格式。
 
 - 运行 `run.bat` 即可编译生成 pdf 文件。
 - 在运行失败时使用 `clean.bat` 清理项目。
 - 运行 `run_open.bat` 在编译完成之后打开 pdf 文件。
+
+手动编译顺序如下：
+
+```bash
+xelatex SDUthesistemplate
+bibtex SDUthesistemplate
+xelatex SDUthesistemplate
+xelatex SDUthesistemplate
+```
+
+### 参考文献
+
+正文中使用 `\cite{...}` 引用文献，文献条目写在 `contents/references.bib` 中。模板在
+`contents/bib.tex` 中使用：
+
+```latex
+\bibliographystyle{gbt7714-numeric}
+\bibliography{contents/references}
+```
+
+如需检查字体加载，可编译 `font-check.tex`。如需检查 SDU 样式中的参考文献效果，可编译 `sdu-reference-example.tex`。
 
 ### 打印
 

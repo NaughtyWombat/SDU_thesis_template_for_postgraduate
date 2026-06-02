@@ -1,13 +1,14 @@
 @ECHO OFF
+PUSHD "%~dp0"
 
 SET FILENAME=SDUthesistemplate
 SET XL=xelatex
-::SET BT=bibtex
-SET PL=pdflatex
+SET BT=bibtex
 
-%XL% %~dp0%FILENAME%
-::%BT% %~dp0%FILENAME%.aux
-%PL% %~dp0%FILENAME%
-%PL% %~dp0%FILENAME%
+%XL% %FILENAME%
+%BT% %FILENAME%
+%XL% %FILENAME%
+%XL% %FILENAME%
 pause
 CALL clean
+POPD

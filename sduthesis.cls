@@ -37,16 +37,27 @@
 %----字体名
 \RequirePackage{ifpdf,ifxetex}
 \ifxetex
-  \IfFontExistsTF{SimHei}
-  {
-    \newCJKfontfamily[heitiFakeBold]{\heitiFakeBold}{SimHei}[AutoFakeBold=2.5]
-  }{
-    \newcommand{\heitiFakeBold}{\heiti}
+  \IfFileExists{fonts/simhei.ttf}{%
+    \newCJKfontfamily\heitiFakeBold[Path=fonts/,AutoFakeBold=2.5]{simhei.ttf}
+  }{%
+    \IfFontExistsTF{SimHei}{%
+      \newCJKfontfamily\heitiFakeBold[AutoFakeBold=2.5]{SimHei}
+    }{%
+      \newcommand{\heitiFakeBold}{\heiti}
+    }
   }
 
-  \IfFontExistsTF{Times New Roman}
-  {
-    \setmainfont{Times New Roman}
+  \IfFileExists{fonts/TimesNewRoman.ttf}{%
+    \setmainfont[
+      Path=fonts/,
+      BoldFont=TimesNewRomanBold.ttf,
+      ItalicFont=TimesNewRomanItalic.ttf,
+      BoldItalicFont=TimesNewRomanBoldItalic.ttf
+    ]{TimesNewRoman.ttf}
+  }{%
+    \IfFontExistsTF{Times New Roman}{%
+      \setmainfont{Times New Roman}
+    }{}
   }
 
 \else

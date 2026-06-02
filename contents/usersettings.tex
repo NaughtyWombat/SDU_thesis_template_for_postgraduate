@@ -4,6 +4,43 @@
 \usepackage{dtklogos}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{gbt7714}
+
+\ifxetex
+  \IfFileExists{fonts/TimesNewRoman.ttf}{%
+    \setmainfont[
+      Path = fonts/,
+      BoldFont = TimesNewRomanBold.ttf,
+      ItalicFont = TimesNewRomanItalic.ttf,
+      BoldItalicFont = TimesNewRomanBoldItalic.ttf
+    ]{TimesNewRoman.ttf}
+  }{}
+
+  \IfFileExists{fonts/simsun.ttc}{%
+    \setCJKmainfont[
+      Path = fonts/,
+      BoldFont = simhei.ttf,
+      ItalicFont = simkai.ttf
+    ]{simsun.ttc}
+    \setCJKfamilyfont{song}[Path = fonts/]{simsun.ttc}
+  }{}
+
+  \IfFileExists{fonts/simhei.ttf}{%
+    \setCJKsansfont[Path = fonts/, AutoFakeBold = 2.5]{simhei.ttf}
+    \setCJKfamilyfont{hei}[Path = fonts/, AutoFakeBold = 2.5]{simhei.ttf}
+    \renewcommand{\heitiFakeBold}{\CJKfamily{hei}}
+  }{}
+
+  \IfFileExists{fonts/simkai.ttf}{%
+    \setCJKmonofont[Path = fonts/]{simkai.ttf}
+    \setCJKfamilyfont{kai}[Path = fonts/]{simkai.ttf}
+  }{}
+
+  \IfFileExists{fonts/FangSong_GB2312.ttf}{%
+    \setCJKfamilyfont{fs}[Path = fonts/]{FangSong_GB2312.ttf}
+  }{}
+\fi
+
 % Add Chapter to TOC && Remove Contents from TOC
 \usepackage[chapter, nottoc]{tocbibind}
 % 允许使用子图 subfloat
